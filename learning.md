@@ -351,8 +351,5 @@ console.log(nullValue + ":" + typeof nullValue);
 // null:object
 ```
 
-#### undefined
-
-undefined 是一个
 
 
