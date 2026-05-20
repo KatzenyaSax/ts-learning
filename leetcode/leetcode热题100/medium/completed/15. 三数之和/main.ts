@@ -1,3 +1,5 @@
+//完成
+
 //选择排序 O(n^2)
 function selectSort(nums: number[]): number[] {
     for(let i = 0; i < nums.length - 1; i++) {
