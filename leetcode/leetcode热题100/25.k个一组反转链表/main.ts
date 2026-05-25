@@ -1,4 +1,3 @@
-import { escapeLeadingUnderscores, LabeledStatement } from "typescript";
 
 class ListNode{
     val: number;
@@ -53,7 +52,7 @@ function reverseKGroup(head: ListNode | null, k: number): ListNode | null {
 
 
 
-let ptr = reverseKGroup(new ListNode(1,
+let ptr0 = reverseKGroup(new ListNode(1,
     new ListNode(2,
         new ListNode(3,
             new ListNode(4,
@@ -65,5 +64,5 @@ let ptr = reverseKGroup(new ListNode(1,
     )
 ), 4);
 
-console.log(ptr);
+console.log(ptr0);
 
