@@ -32,7 +32,7 @@ function reverseKGroup(head: ListNode | null, k: number): ListNode | null {
     let kHead = headPtr;
     let kEnd = head;
 
-    for(let i=0; i< k-1; i++){
+    for(let i=0; i< k; i++){
         console.log("val: "+head?.val);
         let ptr1 = headPtr.next;
         let ptr2 = head;
@@ -62,7 +62,13 @@ let ptr0 = reverseKGroup(new ListNode(1,
             )
         )
     )
-), 4);
+), 3);
+
+/*
+while(ptr0!=null){
+    console.log(ptr0.val);
+    ptr0 = ptr0.next;
+}
+*/
 
 console.log(ptr0);
-
