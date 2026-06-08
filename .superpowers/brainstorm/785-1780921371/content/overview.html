@@ -1,0 +1,69 @@
+<h2>三路分区快速选择 (QuickSelect)</h2>
+<p class="subtitle">荷兰国旗问题 + 剪枝 = 平均 O(n) 的第 k 大查找</p>
+
+<div class="section">
+  <h3>一句话总结</h3>
+  <div class="mockup">
+    <div class="mockup-body" style="font-size:16px;line-height:1.8;padding:20px">
+      每次选一个 <b>pivot</b>，把数组切成<b>三块</b>：<br>
+      <span style="color:#dc2626">⬅ 比 pivot 小的</span> &nbsp;|&nbsp;
+      <span style="color:#2563eb">🟦 等于 pivot 的</span> &nbsp;|&nbsp;
+      <span style="color:#16a34a">比 pivot 大的 ➡</span><br><br>
+      然后看目标落在哪一块，<b>只递归那一块</b>（或直接命中返回）。
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>为什么需要三路分区？</h3>
+  <div class="split">
+    <div class="mockup">
+      <div class="mockup-header">二路分区（Lomuto）的问题</div>
+      <div class="mockup-body" style="font-size:14px;line-height:1.7">
+        当数组全是 1 时：<br>
+        <code>arr[i] &lt; pivot</code> 永远为 false<br><br>
+        → 所有元素在 "≥ pivot" 一侧<br>
+        → 范围每次只缩小 1<br>
+        → n 层递归 → <b>O(n²) 超时</b>
+      </div>
+    </div>
+    <div class="mockup">
+      <div class="mockup-header">三路分区的解决方案</div>
+      <div class="mockup-body" style="font-size:14px;line-height:1.7">
+        当数组全是 1 时：<br>
+        所有元素归入 <b>"== pivot"</b> 区域<br><br>
+        → targetIdx 一定落在 ==pivot 中<br>
+        → <b>一次扫描后直接返回</b><br>
+        → <b>O(n)，0 次递归</b>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>点击下方按钮，逐步探索：</h3>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="partition" onclick="toggleSelect(this)">
+    <div class="letter">1</div>
+    <div class="content">
+      <h3>分区过程</h3>
+      <p>lt / gt / i 三指针如何移动，数组如何被切成三块</p>
+    </div>
+  </div>
+  <div class="option" data-choice="prune" onclick="toggleSelect(this)">
+    <div class="letter">2</div>
+    <div class="content">
+      <h3>剪枝逻辑</h3>
+      <p>分区后如何决定去哪边（或直接命中）</p>
+    </div>
+  </div>
+  <div class="option" data-choice="full" onclick="toggleSelect(this)">
+    <div class="letter">3</div>
+    <div class="content">
+      <h3>完整演示</h3>
+      <p>用一个具体例子看完整流程，并对比之前出错版本的差异</p>
+    </div>
+  </div>
+</div>
