@@ -13,6 +13,7 @@ class TreeNode {
 function buildTree(nums: number[], begin: number, end: number) : TreeNode|null{
     //范围只有一个元素，直接返回这个元素为节点
     if(begin==end) return new TreeNode(nums[begin]);
+    
 
     if(begin>end) return null;
 
