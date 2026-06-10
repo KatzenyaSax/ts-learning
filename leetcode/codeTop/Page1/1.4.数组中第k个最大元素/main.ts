@@ -1,45 +1,4 @@
 
-function QuickSort(arr: number[], left: number, right: number): void {
-    //边界条件
-    if(left >= right) return;
-    //选定基准元素
-    let pivot = arr[left];
-    let i = left;
-    let j = right;
-    //此时，arr[i]的值被选定为基准元素，数组的这个位置已经没用了，允许覆盖
-
-    while(i<j){
-        //从右向左扫描，找到第一个小于基准元素的元素
-        while(i<j){
-            if(arr[j] < pivot){//如果右边元素小于pivot，那就左移，顺便左边指针右移
-                arr[i] = arr[j];
-                i++;
-                break;
-            }else {//如果右边元素大于等于pivot，不动，继续左移
-                j--;
-            }
-        } 
-        if(i==j) break;
-        //从左向右扫描，找到第一个大于基准元素的元素
-        while(i<j){
-            if(arr[i] > pivot){//如果左边元素大于pivot，那就右移，顺便右边指针左移
-                arr[j] = arr[i];
-                j--;
-                break;
-            }else {//如果左边元素小于等于pivot，不动，继续右移
-                i++;
-            }
-        } 
-    }
-
-    //把基准元素放到最终位置
-    arr[i] = pivot;
-    //递归排序pivot左右两个子序列
-    QuickSort(arr, left, i-1);
-    QuickSort(arr, i+1, right);
-}
-
-
 /**
  * 
  * @param arr 
@@ -73,6 +32,15 @@ function QuickSelect(arr: number[], left: number, right: number, k: number): num
      *    [left..lt-1]  < pivot
      *    [lt..gt]      == pivot
      *    [gt+1..right] > pivot
+     * 
+     * 例如[3,2,3,1,2,4,5,5,6]，选择pivot=3，那么第一次三路分区后：
+     * 
+     *  2   1   2   3   3   4   5   5   6
+     *              |   |
+     *             lt   gt
+     * 
+     * 显然，小于lt的都是小于pivot的，大于gt的都是大于pivot的
+     * 并且第lt一直到第gt的元素都是3，这在有序数组中也一定成立
      *
      *    这样遇到大量重复元素时，== pivot 的区域直接跳过，
      *    范围严格缩小，避免 O(n²)
@@ -82,7 +50,7 @@ function QuickSelect(arr: number[], left: number, right: number, k: number): num
     let i = left;       // 当前扫描位置（当前指针）
 
     //从左到右扫描
-    while(i <= gt){
+    while(i <= gt){ //为什么i必须小于等于gt？因为gt右边的数字一定大于pivot了，相当于自动完成了其中一路分区
         if(arr[i] < pivot){
             //当
             [arr[i], arr[lt]] = [arr[lt], arr[i]];
@@ -91,7 +59,7 @@ function QuickSelect(arr: number[], left: number, right: number, k: number): num
         } else if(arr[i] > pivot){
             [arr[i], arr[gt]] = [arr[gt], arr[i]];
             gt--;
-            // i 不自增，因为换过来的新元素还没检查
+            // i 不自增，因为换过来的新元素还没检查（gt位置上不代表大于pivot）
         } else {
             i++;  // 等于 pivot，跳过
         }
