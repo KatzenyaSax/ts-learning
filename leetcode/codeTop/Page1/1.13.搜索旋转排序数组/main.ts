@@ -21,13 +21,44 @@ function search(nums: number[], target: number): number {
 
     //二分查找
     while(left<=right){
+        //mid：使用Math.floor()方法向下取整
+        let mid = Math.floor((left+right)/2);
+        //边界条件
+        if(nums[mid]==target) return mid;
 
-        let mid = (right+left+1)%2==1?(right+left)/2:(right+left-1)/2;
+        /**
+         * I.
+         * left         mid         right
+         *  [4,  5,  6,  7,  0,  1,  2]
+         * 
+         * left<mid => 左侧有序，直接进入逻辑
+         * 
+         * target = 0 ，不在[left, right]内，因此判断target在右侧，于是left = 3+1 =4 => 0
+         * 
+         * II.
+         *                  left mid  right
+         *  [4,  5,  6,  7,  0,  1,  2]
+         * 
+         * left<mid => 左侧有序，直接进入逻辑
+         * 
+         * target = 0, 在[left, right]内，right= mid-1 = 5-1 = 4 =>0 
+         * 
+         * III.
+         *                      right
+         *                  left mid  
+         *  [4,  5,  6,  7,  0,  1,  2] 
+         * 
+         * right = 4, right = 5, mid = (4+5)/2 = 4
+         * 而 target == nums[4] 成立，于是返回 4
+         * 
+         */
 
-        console.log("left: "+left+" ,mid: "+mid+" , right: "+right);
+        /**
+         * 关键洞见：因为mid已经先做判断了，所以不要再把mid算入左右任意一个序列了，反而降低成功率
+         */
 
         //左侧区间有序
-        if(nums[left]<=nums[right]){
+        if(nums[left]<=nums[mid]){
             if(target>=nums[left] && target<nums[mid]){   //target in left
                 right = mid-1;
             } else {
@@ -40,10 +71,6 @@ function search(nums: number[], target: number): number {
                 right = mid-1;
             }
         }
-        
-
-
-
     }
     return -1;
 };

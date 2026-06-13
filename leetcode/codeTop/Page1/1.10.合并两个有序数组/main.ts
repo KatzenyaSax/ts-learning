@@ -1,24 +1,4 @@
-class ListNode{
-    val: number;
-    next : ListNode | null;
-
-    constructor(v: number, n : ListNode | null){
-        this.val = !v ? 0 : v;
-        this.next = n != undefined ? n : null;
-    }
-};
-
-function printList(head :ListNode|null){
-    let str : string = "";
-    let ptr = head;
-    while(ptr!=null){
-        str+=ptr.val;
-        str+=" -> ";
-        ptr = ptr?.next;
-    }
-    str+="null";
-    console.log(str);
-};
+import { ListNode,printList } from "../../../lib/lib";
 
 function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode | null {
     if(list1==null) return list2;
