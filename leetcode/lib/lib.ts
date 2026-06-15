@@ -8,6 +8,18 @@ export class ListNode{
     }
 };
 
+export function buildList(nums: number[]): ListNode | null {
+    if (nums.length === 0) return null;
+
+    const head = new ListNode(nums[0], null);
+    let curr = head;
+    for (let i = 1; i < nums.length; i++) {
+        curr.next = new ListNode(nums[i], null);
+        curr = curr.next;
+    }
+    return head;
+}
+
 export function printList(head :ListNode|null){
     let str : string = "";
     let ptr = head;
